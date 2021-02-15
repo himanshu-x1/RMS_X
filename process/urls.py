@@ -5,5 +5,6 @@ from process import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.showIdex,name='main_page')
+    path('',views.showIdex,name='main_page'),
+    path('registration/',views.registration,name='registration')
 ]

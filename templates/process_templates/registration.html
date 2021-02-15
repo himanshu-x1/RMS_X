@@ -1,0 +1,47 @@
+
+{% extends 'index.html' %}
+
+{% block content %}
+    {% load static %}
+
+    <style>
+        #r_one{
+            text-align: center;
+            margin: 5px;
+
+        }
+    .r_two{
+        border-style: solid;
+            border-radius: 10px;
+            border-width: 2px;
+            border-color: black;
+            margin: 5px;
+            padding: 10px;
+
+
+    }
+
+    </style>
+
+{#    <div id="r_one">#}
+{#    <h1>Registration Page</h1>#}
+{#    {% for x in form %}#}
+{#        <div class="r_two">{{ x.label }}#}
+{#        {{ x }}</div>#}
+{##}
+{#    {% endfor %}#}
+{#    <button type="submit" class="btn btn-primary">Save</button>#}
+{#    </div>#}
+
+    <table align="center" border="0">
+    <tr><th colspan="2"><h1>Registration Page</h1></th></tr>
+    {% for x in form  %}
+        <tr>
+        <th>{{ x.label }}</th>
+        <th>{{ x }}</th>
+        </tr>
+    {% endfor %}
+    <tr><th colspan="2"><button type="submit" class="btn btn-primary">Save</button></th></tr>
+    </table>
+
+{% endblock %}
