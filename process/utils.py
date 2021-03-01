@@ -7,9 +7,9 @@ def sendTextMessage(message,contactno):
     querystring = {
         "authorization": "UV6Fl6CIKIhRzrUWa05bOK6ZtYsALx0ggjd7ycmQC6v4Q1z5xLGJ4JLBOveQ",
         "sender_id": "CHKSMS",
-        "message": message,
+        "message": 2,
         "Language": "english",
-        "variables_values": "12345",
+        "variables_values": message,
         "route": "s",
         "numbers": contactno}
 

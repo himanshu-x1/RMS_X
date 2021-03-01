@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from process.forms import RegistrationForm
+from process.models import RegistrationModel
 
 # Create your views here.
 def showIdex(request):
@@ -25,3 +26,21 @@ def registration(request):
 
 def user_OTP(request):
     return render(request,"process_templates/otp.html")
+
+
+def validate_otp(request):
+    try:
+        result = RegistrationModel.objects.get(contact=request.POST.get("t1"),otp=request.POST.get("t2"))
+        if result.status == "pending":
+            result.status = "approved" #updating
+            result.save() #saving
+            return redirect('conformation')
+        else:
+            pass
+    except RegistrationModel.DoesNotExist:
+        print("Invalid")
+    return None
+
+
+def conformation(request):
+    return render(request,"process_templates/conformation.html")
