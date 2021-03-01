@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from process.forms import RegistrationForm
 
 # Create your views here.
@@ -13,9 +13,9 @@ def registration(request):
         print("-------3-------")
         if rf.is_valid():
             print("-------4-------")
-            #rf.otp = 5475
-            print("-------5-------")
+
             rf.save()
+            return redirect('user-otp')
         else:
             return render(request, 'process_templates/registration.html', {"form": rf})
     else:
@@ -23,4 +23,5 @@ def registration(request):
         return render(request,'process_templates/registration.html',{"form":rf})
 
 
-
+def user_OTP(request):
+    return render(request,"process_templates/otp.html")

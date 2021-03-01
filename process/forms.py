@@ -1,14 +1,19 @@
 
 from django import forms
 from process.models import *
+import random
+from process.utils import sendTextMessage
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
     def clean_otp(self):
-        otp = self.cleaned_data['otp']
-        print("-------",otp)
-        return  5475
+        cno = self.cleaned_data['contact']
+        #otp = self.cleaned_data['otp'] #0
+        otp = random.randint(100000,999999)
+        message = 2
+        sendTextMessage(message,cno)
+        return  otp
 
 
 
