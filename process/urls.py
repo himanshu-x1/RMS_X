@@ -14,6 +14,9 @@ urlpatterns = [
     path('conformation/',views.conformation,name= 'conformation'),
 
     #otp -page
-    path('user_otp/',views.user_OTP,name='user-otp')
+    path('user_otp/',views.user_OTP,name='user-otp'),
+
+    #for login
+    path('login/',views.login,name="login"),
 
 ]

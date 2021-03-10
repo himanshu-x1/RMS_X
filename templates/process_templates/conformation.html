@@ -3,6 +3,9 @@
 
 {% block content %}
     {% load static %}
-    <h1>Thanks for your Registation</h1>
-    <a href="#">Login</a>
+    {% for x in messages %}
+        <h1>{{ x }}</h1>
+    {% endfor%}
+
+    <a href="{% url 'login' %}">Login From Here</a>
 {% endblock %}

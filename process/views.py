@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from process.forms import RegistrationForm
 from process.models import RegistrationModel
+from django.contrib.messages import success
 
 # Create your views here.
 def showIdex(request):
@@ -34,13 +35,21 @@ def validate_otp(request):
         if result.status == "pending":
             result.status = "approved" #updating
             result.save() #saving
+            success(request,"Thanks for Registration")
             return redirect('conformation')
-        else:
-            pass
+        elif result.status == "approved":
+            success(request, "Your Registration is Already Approved")
+            return redirect('conformation')
+
     except RegistrationModel.DoesNotExist:
-        print("Invalid")
+        message = "Sorry Invalid Details Please Try Again"
+        return render(request,"process_templates/otp.html",{"message":message})
     return None
 
 
 def conformation(request):
     return render(request,"process_templates/conformation.html")
+
+
+def login(request):
+    return render(request,'process_templates/login.html')

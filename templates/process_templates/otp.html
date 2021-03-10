@@ -24,4 +24,24 @@
    </table>
 </form>
 
+    {% if message %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Warning!........
+  </strong> {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{#        <h1 style="font-size: 35px;#}
+{#        font-family: 'Agency FB';#}
+{#        color: white;#}
+{#        background-color: red;#}
+{#        text-align: center"#}
+{#        >#}
+{#            {{ message }}</h1>#}
+
+{% endif %}
+
 {% endblock %}
