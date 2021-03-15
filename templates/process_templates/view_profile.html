@@ -1,0 +1,19 @@
+
+{% extends 'index.html' %}
+
+{% block content %}
+    {% load static %}
+
+
+
+
+
+    {% if request.session.contact  %}
+        <h1>Welcome to profile page</h1>
+        <h2>Mr/Miss: {{ request.session.name }}</h2>
+    {% else %}
+        <h1>Please Do Login First </h1>
+        <h4>Without login you cannot access this page</h4>
+    {% endif %}
+
+{% endblock %}

@@ -53,3 +53,28 @@ def conformation(request):
 
 def login(request):
     return render(request,'process_templates/login.html')
+
+
+def login_check(request):
+    try:
+        result = RegistrationModel.objects.get(email=request.POST.get("u1"),password=request.POST.get("u2"))
+        if result.status == "pending":
+            return render(request, 'process_templates/login.html', {"error": "Sorry your Registration is not approved"})
+        if result.status =="closed":
+            return render(request, 'process_templates/login.html', {"error": "Sorry your Account is closed"})
+        request.session["contact"] = result.contact
+        request.session["name"] = result.name
+        return redirect('view_profile')
+
+    except RegistrationModel.DoesNotExist:
+        return render(request,'process_templates/login.html',{"error":"Invalid user"})
+
+
+def view_profile(request):
+    return render(request,"process_templates/view_profile.html")
+
+
+def logout(request):
+    del request.session["contact"]
+    del request.session["name"]
+    return redirect('main_page')

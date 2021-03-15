@@ -4,6 +4,9 @@
 {% block content %}
     {% load static %}
 
+    {% if request.session.contact %}
+        <h1>Your are Memeber Already</h1>
+    {% else %}
     <style>
         #r_one{
             text-align: center;
@@ -75,5 +78,6 @@
     <tr><th colspan="2"><button type="submit" class="btn btn-primary">Save</button></th></tr>
     </table>
     </form>
+    {% endif %}
 
 {% endblock %}
