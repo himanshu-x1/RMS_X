@@ -14,6 +14,9 @@ class IndustryModel(models.Model):
     ino = models.AutoField(primary_key=True)
     type = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.type
+
 
 class ProfileModel(models.Model):
     pno = models.AutoField(primary_key=True)

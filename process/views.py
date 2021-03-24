@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from process.forms import RegistrationForm
-from process.models import RegistrationModel
+from process.models import RegistrationModel,ProfileModel
 from django.contrib.messages import success
 
 # Create your views here.
@@ -64,6 +64,7 @@ def login_check(request):
             return render(request, 'process_templates/login.html', {"error": "Sorry your Account is closed"})
         request.session["contact"] = result.contact
         request.session["name"] = result.name
+        request.session["rno"] = result.rno
         return redirect('view_profile')
 
     except RegistrationModel.DoesNotExist:
@@ -71,10 +72,23 @@ def login_check(request):
 
 
 def view_profile(request):
-    return render(request,"process_templates/view_profile.html")
+    rno = request.session["rno"]
+    try:
+        result = ProfileModel.objects.get(person__rno=rno)
+        status = True
+    except ProfileModel.DoesNotExist:
+        status = False
+
+    return render(request,"process_templates/view_profile.html",{"status":status})
+
 
 
 def logout(request):
-    del request.session["contact"]
-    del request.session["name"]
-    return redirect('main_page')
+    try:
+        del request.session["contact"]
+        del request.session["name"]
+        del request.session["rno "]
+        return redirect('main_page')
+    except KeyError:
+        success(request,"Please Do Login")
+        return render(request,"process_templates/login.html",{"error":"Please do Login"})
